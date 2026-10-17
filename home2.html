@@ -858,6 +858,7 @@ const HI = {
   "Help and FAQ":"मदद और प्रश्न",
   "Koby 24/7 Emergency Hospital":"कोबी 24/7 इमरजेंसी अस्पताल",
   "Ask Koby AI":"कोबी एआई से पूछें",
+  "Hi! I am Koby AI. I can handle all your pet needs here and get you to the ER fast if it's urgent.":"नमस्ते! मैं कोबी एआई हूँ। मैं आपकी सारी पालतू ज़रूरतें यहीं संभाल सकता हूँ, और अगर ज़रूरी हो तो जल्दी ईआर तक पहुँचा सकता हूँ।",
   "Open Koby AI":"कोबी एआई खोलें",
   "Koby AI":"कोबी एआई",
   "Koby categories":"कोबी श्रेणियाँ",
@@ -1913,7 +1914,7 @@ function applyPhrase(s){
   if ((m = s.match(/^(.+) per call, credited if you're seen at a Pet Care Centre or the ER within 48 hours\.$/))) return m[1] + " प्रति कॉल, 48 घंटे में पेट केयर सेंटर या ईआर पर दिखाने पर जुड़ जाती है।";
   let t = s;
   t = t.replace(/How's ([^?]+?) today\?/g, "$1 आज कैसा है?");
-  t = t.replace(/I can book walks, boarding and vet calls, track orders, and get you to the ER fast if it's urgent\./g, "मैं वॉक, बोर्डिंग और पशु चिकित्सक की कॉल बुक कर सकता हूँ, ऑर्डर ट्रैक कर सकता हूँ, और इमरजेंसी हो तो जल्दी ईआर तक पहुँचा सकता हूँ।");
+  t = t.replace(/Hi! I am Koby AI\. I can handle all your pet needs here and get you to the ER fast if it's urgent\./g, "नमस्ते! मैं कोबी एआई हूँ। मैं आपकी सारी पालतू ज़रूरतें यहीं संभाल सकता हूँ, और अगर ज़रूरी हो तो जल्दी ईआर तक पहुँचा सकता हूँ।");
   t = t.replace(/₹([\d,]+) a day/g, "₹$1 प्रति दिन");
   t = t.replace(/₹([\d,]+) a call/g, "₹$1 प्रति कॉल");
   t = t.replace(/₹([\d,]+) a night/g, "₹$1 प्रति रात");
@@ -3000,9 +3001,9 @@ function renderChat(){
 function userSay(t){ C.msgs.push({who:"user", html:esc(t)}); C.chips = []; renderChat(); }
 
 function chatContext(){
-  const p = pet(), name = S.user && S.user.name ? " " + S.user.name : "";
+  const p = pet();
   if (!C.msgs.length){
-    C.msgs.push({who:"bot", html:`Hi${esc(name)}! ${p ? `How's ${esc(p.name)} today?` : "I'm Koby AI."} I can book walks, boarding and vet calls, track orders, and get you to the ER fast if it's urgent.`});
+    C.msgs.push({who:"bot", html:"Hi! I am Koby AI. I can handle all your pet needs here and get you to the ER fast if it's urgent."});
     C.chips = DEFAULT_CHIPS;
   }
   const key = location.hash || "#/";
